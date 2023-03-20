@@ -1,5 +1,7 @@
+import List from "./components/List";
+
 function App() {
-  return <div></div>;
+  return <List />;
 }
 
 export default App;

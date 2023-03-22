@@ -49,9 +49,14 @@
 
 .content {
   color: hsl(211, 10%, 45%);
-  font-size: 1.01rem;
+  font-size: 1.02rem;
   line-height: 1.5rem;
   margin-bottom: 1rem;
+}
+
+.content > span {
+  color: hsl(238, 40%, 52%);
+  font-weight: 500;
 }
 
 .scoreChanger {
@@ -114,22 +119,4 @@
 
 .edit {
   color: hsl(238, 40%, 52%);
-}
-
-.replies {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.replies > :last-child {
-  flex-grow: 1;
-}
-
-.line {
-  background-color: hsl(223, 10%, 86%);
-  width: 1px;
-  flex-shrink: 0;
 }

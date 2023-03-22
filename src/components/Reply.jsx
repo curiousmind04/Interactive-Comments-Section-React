@@ -1,17 +1,15 @@
 import { useContext, useState } from "react";
-
-import Replies from "./Replies";
-import ReplyForm from "./ReplyForm";
 import Context from "../context/context";
-import classes from "./Comment.module.css";
+import classes from "./Reply.module.css";
+import ReplyForm from "./ReplyForm";
 
-function Comment(props) {
+function Reply(props) {
   const [replying, setReplying] = useState(false);
 
   const context = useContext(Context);
 
-  const deleteCommentHandler = () => {
-    context.deleteComment(props.id);
+  const deleteReplyHandler = () => {
+    context.deleteReply(props.commentId, props.id);
   };
 
   const openReplyBox = () => {
@@ -40,8 +38,10 @@ function Comment(props) {
           </div>
           <span className={classes.date}>{props.createdAt}</span>
         </div>
-        <p className={classes.content}>{props.content}</p>
 
+        <p className={classes.content}>
+          <span>{`@${props.replyingTo}`}</span> {props.content}
+        </p>
         <div className={classes.bottom}>
           <div className={classes.scoreChanger}>
             <div>
@@ -75,7 +75,7 @@ function Comment(props) {
           )}
           {context.currentUser.username === props.user.username && (
             <div className={classes.actions}>
-              <button className={classes.delete} onClick={deleteCommentHandler}>
+              <button className={classes.delete} onClick={deleteReplyHandler}>
                 <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z"
@@ -100,18 +100,12 @@ function Comment(props) {
       {replying && (
         <ReplyForm
           replyingTo={props.user.username}
-          commentId={props.id}
+          commentId={props.commentId}
           closeReplyBox={closeReplyBox}
         />
-      )}
-      {props.replies.length > 0 && (
-        <div className={classes.replies}>
-          <div className={classes.line}></div>
-          <Replies commentId={props.id} replies={props.replies} />
-        </div>
       )}
     </>
   );
 }
 
-export default Comment;
+export default Reply;

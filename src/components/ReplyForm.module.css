@@ -1,0 +1,50 @@
+.form {
+  background-color: hsl(0, 0%, 100%);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 0.4rem;
+}
+
+.form > textarea {
+  resize: none;
+  width: 100% !important;
+  height: 6rem;
+  border: 1px solid hsl(223, 10%, 86%);
+  border-radius: 0.4rem;
+  outline: none;
+  font: inherit;
+  padding: 0.8rem 0.8rem 0.8rem 1.5rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+}
+
+.form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form picture {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.form picture > img {
+  width: 100%;
+}
+
+.form .button {
+  background-color: hsl(238, 40%, 52%);
+  color: hsl(0, 0%, 100%);
+  width: 6.5rem;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  font: inherit;
+  font-size: 1.02rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+}

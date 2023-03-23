@@ -14,7 +14,7 @@ function ReplyForm(props) {
     const data = {
       id: Math.random(),
       content: input,
-      createdAt: new Date() - date,
+      createdAt: date,
       score: 0,
       replyingTo: props.replyingTo,
       user: {

@@ -14,7 +14,7 @@ function Form(props) {
     context.addComment({
       id: Math.random(),
       content: input,
-      createdAt: new Date() - date,
+      createdAt: date,
       score: 0,
       user: {
         image: {

@@ -7,9 +7,13 @@ import Context from "./context/context";
 function App() {
   const context = useContext(Context);
 
+  // console.log(context.commentData);
+
   return (
     <main>
-      <Comments commentData={context.commentData} />
+      {context.commentData.comments && (
+        <Comments commentData={context.commentData} />
+      )}
       <Form />
     </main>
   );

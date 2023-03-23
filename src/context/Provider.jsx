@@ -3,18 +3,21 @@ import { useState, useEffect } from "react";
 import Context from "./context";
 
 const Provider = (props) => {
-  const [commentData, setCommentData] = useState();
-  const [currentUser, setCurrentUser] = useState();
+  const [commentData, setCommentData] = useState(
+    JSON.parse(localStorage.getItem("commentData")) || {}
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("data.json");
       const data = await response.json();
       sortComments(data);
-      //   setCommentData(data);
-      setCurrentUser(data.currentUser);
     };
-    fetchData();
+
+    if (!commentData.comments) {
+      console.log("fetch");
+      fetchData();
+    }
   }, []);
 
   const addCommentHandler = (comment) => {
@@ -146,9 +149,13 @@ const Provider = (props) => {
     setCommentData(newData);
   };
 
+  useEffect(() => {
+    localStorage.setItem("commentData", JSON.stringify(commentData));
+  }, [commentData]);
+
   const context = {
     commentData: commentData,
-    currentUser: currentUser,
+    currentUser: commentData.currentUser,
     addComment: addCommentHandler,
     editComment: editCommentHandler,
     editCommentScore: editCommentScoreHandler,

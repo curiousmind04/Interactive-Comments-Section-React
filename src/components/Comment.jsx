@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 
 import Replies from "./Replies";
 import ReplyForm from "./ReplyForm";
+import Modal from "./Modal";
 import Context from "../context/context";
 
 import classes from "./Comment.module.css";
@@ -9,12 +10,22 @@ import classes from "./Comment.module.css";
 function Comment(props) {
   const [replying, setReplying] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const context = useContext(Context);
 
-  const deleteCommentHandler = () => {
+  const openModalHandler = () => {
     setEditing(false);
+    setDeleting(true);
+  };
+
+  const closeModal = () => {
+    setDeleting(false);
+  };
+
+  const onDelete = () => {
     context.deleteComment(props.id);
+    setDeleting(false);
   };
 
   const openReplyBox = () => {
@@ -50,6 +61,41 @@ function Comment(props) {
     context.editCommentScore(score, props.id);
   };
 
+  const formatter = new Intl.RelativeTimeFormat(undefined, {
+    numeric: "auto",
+    style: "narrow",
+  });
+
+  const DIVISIONS = [
+    { amount: 60, name: "seconds" },
+    { amount: 60, name: "minutes" },
+    { amount: 24, name: "hours" },
+    { amount: 7, name: "days" },
+    { amount: 4.34524, name: "weeks" },
+    { amount: 12, name: "months" },
+    { amount: Number.POSITIVE_INFINITY, name: "years" },
+  ];
+
+  function formatTimeAgo(date) {
+    let duration;
+
+    if (typeof date === "string" && date.includes("Z")) {
+      duration = (new Date(date) - new Date()) / 1000;
+    } else if (typeof date === "string") {
+      return date;
+    } else {
+      duration = (date - new Date()) / 1000;
+    }
+
+    for (let i = 0; i < DIVISIONS.length; i++) {
+      const division = DIVISIONS[i];
+      if (Math.abs(duration) < division.amount) {
+        return formatter.format(Math.round(duration), division.name);
+      }
+      duration /= division.amount;
+    }
+  }
+
   return (
     <>
       <div className={classes.container}>
@@ -66,7 +112,7 @@ function Comment(props) {
               </div>
             )}
           </div>
-          <span className={classes.date}>{props.createdAt}</span>
+          <span className={classes.date}>{formatTimeAgo(props.createdAt)}</span>
         </div>
         {!editing && <p className={classes.content}>{props.content}</p>}
         {editing && (
@@ -108,7 +154,7 @@ function Comment(props) {
           )}
           {context.currentUser.username === props.user.username && (
             <div className={classes.actions}>
-              <button className={classes.delete} onClick={deleteCommentHandler}>
+              <button className={classes.delete} onClick={openModalHandler}>
                 <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z"
@@ -137,6 +183,7 @@ function Comment(props) {
           closeReplyBox={closeReplyBox}
         />
       )}
+      {deleting && <Modal closeModal={closeModal} onDelete={onDelete} />}
       {props.replies.length > 0 && (
         <div className={classes.replies}>
           <div className={classes.line}></div>

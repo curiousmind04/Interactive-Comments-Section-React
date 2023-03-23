@@ -54,6 +54,38 @@
   margin-bottom: 1rem;
 }
 
+.form {
+  margin-bottom: 1rem;
+}
+
+.form > textarea {
+  resize: none;
+  width: 100% !important;
+  height: 6rem;
+  border: 1px solid hsl(223, 10%, 86%);
+  border-radius: 0.4rem;
+  outline: none;
+  font: inherit;
+  padding: 0.8rem 0.8rem 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+}
+
+.form .button {
+  background-color: hsl(238, 40%, 52%);
+  color: hsl(0, 0%, 100%);
+  width: 6.5rem;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  font: inherit;
+  font-size: 1.02rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .scoreChanger {
   background-color: hsl(228, 33%, 97%);
   width: 6.5rem;
@@ -68,6 +100,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.scoreChanger > div > svg {
+  pointer-events: none;
 }
 
 .scoreChanger > p {

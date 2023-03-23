@@ -10,8 +10,8 @@ const Provider = (props) => {
     const fetchData = async () => {
       const response = await fetch("data.json");
       const data = await response.json();
-      // console.log(data);
-      setCommentData(data);
+      sortComments(data);
+      //   setCommentData(data);
       setCurrentUser(data.currentUser);
     };
     fetchData();
@@ -33,6 +33,71 @@ const Provider = (props) => {
     const replies = commentData.comments[index].replies.concat(data);
 
     commentData.comments[index].replies = replies;
+
+    const newData = {
+      currentUser: commentData.currentUser,
+      comments: commentData.comments,
+    };
+    setCommentData(newData);
+  };
+
+  const editCommentHandler = (input, commentId) => {
+    const index = commentData.comments.findIndex(
+      (comment) => comment.id === commentId
+    );
+
+    commentData.comments[index].content = input;
+
+    const newData = {
+      currentUser: commentData.currentUser,
+      comments: commentData.comments,
+    };
+    setCommentData(newData);
+  };
+
+  const editReplyHandler = (input, commentId, replyId) => {
+    const commentIndex = commentData.comments.findIndex(
+      (comment) => comment.id === commentId
+    );
+
+    const replyIndex = commentData.comments[commentIndex].replies.findIndex(
+      (reply) => reply.id === replyId
+    );
+
+    commentData.comments[commentIndex].replies[replyIndex].content = input;
+
+    const newData = {
+      currentUser: commentData.currentUser,
+      comments: commentData.comments,
+    };
+    setCommentData(newData);
+  };
+
+  const editCommentScoreHandler = (score, commentId) => {
+    const index = commentData.comments.findIndex(
+      (comment) => comment.id === commentId
+    );
+
+    commentData.comments[index].score = score;
+
+    const newData = {
+      currentUser: commentData.currentUser,
+      comments: commentData.comments,
+    };
+    // setCommentData(newData);
+    sortComments(newData);
+  };
+
+  const editReplyScoreHandler = (score, commentId, replyId) => {
+    const commentIndex = commentData.comments.findIndex(
+      (comment) => comment.id === commentId
+    );
+
+    const replyIndex = commentData.comments[commentIndex].replies.findIndex(
+      (reply) => reply.id === replyId
+    );
+
+    commentData.comments[commentIndex].replies[replyIndex].score = score;
 
     const newData = {
       currentUser: commentData.currentUser,
@@ -67,12 +132,30 @@ const Provider = (props) => {
     setCommentData(newData);
   };
 
+  const sortComments = (data) => {
+    let arr = [...data.comments];
+    let byScoreDecreasing = arr.slice(0);
+    byScoreDecreasing.sort(function (a, b) {
+      return b.score - a.score;
+    });
+    data.comments = [...byScoreDecreasing];
+    const newData = {
+      currentUser: data.currentUser,
+      comments: data.comments,
+    };
+    setCommentData(newData);
+  };
+
   const context = {
     commentData: commentData,
     currentUser: currentUser,
     addComment: addCommentHandler,
+    editComment: editCommentHandler,
+    editCommentScore: editCommentScoreHandler,
     deleteComment: deleteCommentHandler,
     addReply: addReplyHandler,
+    editReply: editReplyHandler,
+    editReplyScore: editReplyScoreHandler,
     deleteReply: deleteReplyHandler,
   };
 

@@ -64,11 +64,16 @@
   height: 6rem;
   border: 1px solid hsl(223, 10%, 86%);
   border-radius: 0.4rem;
-  outline: none;
+  /* outline: none; */
   font: inherit;
   padding: 0.8rem 0.8rem 0.8rem 1rem;
   margin-bottom: 0.8rem;
   cursor: pointer;
+}
+
+.form > textarea:focus {
+  outline: none;
+  border: 1px solid hsl(238, 40%, 52%);
 }
 
 .form .button {
@@ -168,4 +173,34 @@
   background-color: hsl(223, 10%, 86%);
   width: 1px;
   flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .form > textarea:hover {
+    border: 1px solid hsl(238, 40%, 52%);
+  }
+  .form .button:hover {
+    background-color: hsl(239, 57%, 85%);
+  }
+  .reply:hover {
+    color: hsl(239, 57%, 85%);
+  }
+  .reply:hover > svg > path {
+    fill: hsl(239, 57%, 85%);
+  }
+  .edit:hover {
+    color: hsl(239, 57%, 85%);
+  }
+  .edit:hover > svg > path {
+    fill: hsl(239, 57%, 85%);
+  }
+  .delete:hover {
+    color: hsl(357, 100%, 86%);
+  }
+  .delete:hover > svg > path {
+    fill: hsl(357, 100%, 86%);
+  }
+  .scoreChanger > div:hover > svg > path {
+    fill: hsl(238, 40%, 52%);
+  }
 }

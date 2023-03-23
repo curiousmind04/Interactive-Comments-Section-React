@@ -76,6 +76,11 @@
   cursor: pointer;
 }
 
+.form > textarea:focus {
+  outline: none;
+  border: 1px solid hsl(238, 40%, 52%);
+}
+
 .form .button {
   background-color: hsl(238, 40%, 52%);
   color: hsl(0, 0%, 100%);
@@ -155,4 +160,34 @@
 
 .edit {
   color: hsl(238, 40%, 52%);
+}
+
+@media (hover: hover) {
+  .form > textarea:hover {
+    border: 1px solid hsl(238, 40%, 52%);
+  }
+  .form .button:hover {
+    background-color: hsl(239, 57%, 85%);
+  }
+  .reply:hover {
+    color: hsl(239, 57%, 85%);
+  }
+  .reply:hover > svg > path {
+    fill: hsl(239, 57%, 85%);
+  }
+  .edit:hover {
+    color: hsl(239, 57%, 85%);
+  }
+  .edit:hover > svg > path {
+    fill: hsl(239, 57%, 85%);
+  }
+  .delete:hover {
+    color: hsl(357, 100%, 86%);
+  }
+  .delete:hover > svg > path {
+    fill: hsl(357, 100%, 86%);
+  }
+  .scoreChanger > div:hover > svg > path {
+    fill: hsl(238, 40%, 52%);
+  }
 }

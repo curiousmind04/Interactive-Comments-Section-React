@@ -38,7 +38,9 @@ function Form(props) {
             <img src={context.currentUser.image.png} alt="avatar" />
           </picture>
         )}
-        <button className={classes.button}>Send</button>
+        <button className={classes.button}>
+          <h1>Send</h1>
+        </button>
       </div>
     </form>
   );

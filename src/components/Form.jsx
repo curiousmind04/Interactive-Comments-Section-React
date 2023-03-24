@@ -40,7 +40,6 @@ function Form(props) {
         )}
         <button className={classes.button}>Send</button>
       </div>
-      <h1>H1</h1>
     </form>
   );
 }

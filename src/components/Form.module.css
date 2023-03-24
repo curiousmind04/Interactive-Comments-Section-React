@@ -1,3 +1,7 @@
+h1 {
+  display: none;
+}
+
 .form {
   max-width: 30rem;
   margin-inline: auto;

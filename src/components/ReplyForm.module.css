@@ -62,3 +62,31 @@
     border: 1px solid hsl(238, 40%, 52%);
   }
 }
+
+@media (min-width: 42rem) {
+  .form {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 2.5rem auto 6.5rem;
+    grid-template-areas: "avatar textarea button";
+    column-gap: 1rem;
+    position: relative;
+  }
+  .form > div {
+    align-items: flex-start;
+  }
+  .form picture {
+    grid-area: avatar;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .form > textarea {
+    grid-area: textarea;
+    margin-bottom: 0;
+  }
+  .form .button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+}

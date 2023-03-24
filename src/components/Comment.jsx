@@ -79,10 +79,8 @@ function Comment(props) {
   function formatTimeAgo(date) {
     let duration;
 
-    if (typeof date === "string" && date.includes("Z")) {
+    if (typeof date === "string") {
       duration = (new Date(date) - new Date()) / 1000;
-    } else if (typeof date === "string") {
-      return date;
     } else {
       duration = (date - new Date()) / 1000;
     }
@@ -99,28 +97,36 @@ function Comment(props) {
   return (
     <>
       <div className={classes.container}>
-        <div className={classes.top}>
-          <picture>
-            <source srcSet={props.user.image.webp} type="image/webp" />
-            <img src={props.user.image.png} alt="avatar" />
-          </picture>
-          <div className={classes.username}>
-            {props.user.username}
-            {context.currentUser.username === props.user.username && (
-              <div className={classes.badge}>
-                <p>you</p>
+        <div>
+          <div className={classes.top}>
+            <div>
+              <picture>
+                <source srcSet={props.user.image.webp} type="image/webp" />
+                <img src={props.user.image.png} alt="avatar" />
+              </picture>
+              <div className={classes.username}>
+                {props.user.username}
+                {context.currentUser.username === props.user.username && (
+                  <div className={classes.badge}>
+                    <p>you</p>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+
+            <span className={classes.date}>
+              {formatTimeAgo(props.createdAt)}
+            </span>
           </div>
-          <span className={classes.date}>{formatTimeAgo(props.createdAt)}</span>
+          {!editing && <p className={classes.content}>{props.content}</p>}
+          {editing && (
+            <form className={classes.form} onSubmit={editCommentHandler}>
+              <textarea rows="3" defaultValue={props.content}></textarea>
+              <button className={classes.button}>Update</button>
+            </form>
+          )}
         </div>
-        {!editing && <p className={classes.content}>{props.content}</p>}
-        {editing && (
-          <form className={classes.form} onSubmit={editCommentHandler}>
-            <textarea rows="3" defaultValue={props.content}></textarea>
-            <button className={classes.button}>Update</button>
-          </form>
-        )}
+
         <div className={classes.bottom}>
           <div className={classes.scoreChanger}>
             <div onClick={editCommentScoreHandler} id="increase">

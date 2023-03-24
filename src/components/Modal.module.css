@@ -59,3 +59,34 @@
 .container > div > .btn2 {
   background-color: hsl(358, 79%, 66%);
 }
+
+@media (hover: hover) {
+  .container > div > .btn1:hover {
+    background-color: hsl(210, 13%, 66%);
+  }
+  .container > div > .btn2:hover {
+    background-color: hsl(357, 100%, 86%);
+  }
+}
+
+@media (max-width: 21.25rem) {
+  .container {
+    top: calc(50% - 8rem);
+  }
+}
+
+@media (min-width: 26rem) {
+  .container {
+    width: 25rem;
+    padding: 2rem;
+    top: calc(50% - 7.5rem);
+    left: calc(50% - 12.5rem);
+  }
+  .container > :first-child {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .container > :nth-child(2) {
+    margin-bottom: 1.2rem;
+  }
+}

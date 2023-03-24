@@ -21,3 +21,15 @@ body {
   min-height: 100vh;
   position: relative;
 }
+
+@media (max-width: 16.25rem) {
+  body {
+    padding: 2rem 0;
+  }
+}
+
+@media (min-width: 42rem) {
+  body {
+    padding: 4rem 1rem;
+  }
+}

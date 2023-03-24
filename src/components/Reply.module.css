@@ -12,13 +12,19 @@
   margin-bottom: 1rem;
 }
 
-.top > picture {
+.top > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top > div > picture {
   display: block;
   width: 2rem;
   height: 2rem;
 }
 
-.top > picture > img {
+.top > div > picture > img {
   width: 100%;
 }
 
@@ -52,6 +58,7 @@
   font-size: 1.02rem;
   line-height: 1.5rem;
   margin-bottom: 1rem;
+  overflow-wrap: break-word;
 }
 
 .content > span {
@@ -61,6 +68,7 @@
 
 .form {
   margin-bottom: 1rem;
+  text-align: end;
 }
 
 .form > textarea {
@@ -189,5 +197,62 @@
   }
   .scoreChanger > div:hover > svg > path {
     fill: hsl(238, 40%, 52%);
+  }
+}
+
+@media (max-width: 21.25rem) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .form {
+    text-align: start;
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .scoreChanger {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 42rem) {
+  .container {
+    max-width: 45.5rem;
+    margin-inline: auto;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .container > :first-child {
+    flex-grow: 1;
+  }
+  .content {
+    margin-bottom: 0;
+  }
+  .form {
+    margin-bottom: 0;
+  }
+  .scoreChanger {
+    width: 2.5rem;
+    height: 6.5rem;
+    grid-template-rows: auto 1.1rem auto;
+    grid-template-columns: 100%;
+  }
+  .reply {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+  .actions {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    gap: 1.1rem;
   }
 }
